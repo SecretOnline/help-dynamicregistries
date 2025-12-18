@@ -33,8 +33,8 @@ public class DynamicRegistryTest implements ModInitializer {
 	public void onInitialize() {
 
 		ServerWorldEvents.LOAD.register((minecraft, level) -> {
-			level.registryAccess().get(REGISTRY_KEY).ifPresentOrElse(
-					registry -> LOGGER.info("Server load: registry has {} values", registry.value().size()),
+			level.registryAccess().lookup(REGISTRY_KEY).ifPresentOrElse(
+					registry -> LOGGER.info("Server load: registry has {} values", registry.size()),
 					() -> LOGGER.warn("Server load: registry not found"));
 		});
 
@@ -44,8 +44,8 @@ public class DynamicRegistryTest implements ModInitializer {
 				return;
 			}
 
-			level.registryAccess().get(REGISTRY_KEY).ifPresentOrElse(
-					registry -> LOGGER.info("Server 100th tick: registry has {} values", registry.value().size()),
+			level.registryAccess().lookup(REGISTRY_KEY).ifPresentOrElse(
+					registry -> LOGGER.info("Server 100th tick: registry has {} values", registry.size()),
 					() -> LOGGER.warn("Server 100th tick: registry not found"));
 		});
 

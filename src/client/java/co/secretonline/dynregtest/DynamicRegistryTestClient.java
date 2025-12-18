@@ -9,9 +9,9 @@ public class DynamicRegistryTestClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		ClientWorldEvents.AFTER_CLIENT_WORLD_CHANGE.register((minecraft, level) -> {
-			level.registryAccess().get(DynamicRegistryTest.REGISTRY_KEY).ifPresentOrElse(
+			level.registryAccess().lookup(DynamicRegistryTest.REGISTRY_KEY).ifPresentOrElse(
 					registry -> DynamicRegistryTest.LOGGER.info("Client world change: registry has {} values",
-							registry.value().size()),
+							registry.size()),
 					() -> DynamicRegistryTest.LOGGER.warn("Client world change: registry not found"));
 		});
 		DynamicRegistrySetupCallback.EVENT.register((view) -> {
